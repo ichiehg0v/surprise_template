@@ -61,30 +61,16 @@
     
       <div id="message">謝謝 New Bing 幫我寫程式 </div>
     
-      <!-- 引入 jQuery 函式庫 -->
-      <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-    
-      <!-- 寫一些 JavaScript 程式碼來控制網頁行為 -->
       <script>
-        
-         // 當文件載入完成後執行以下函數
-         $(document).ready(function() {
-    
-           // 當點擊任何一張照片時執行以下函數
-           $(".photo").click(function() {
-    
-             // 將被點擊的照片隱藏起來
-             $(this).hide();
-    
-             // 如果所有的照片都隱藏了
-             if ($(".photo").length == $(".photo:hidden").length) {
-    
-               // 將訊息顯示出來
-               $("#message").show();
-             }
-           });
-         });
- 
-       </script>
+        const photos = document.querySelectorAll('.photo');
+        const message = document.getElementById('message');
+        let remaining = photos.length;
+        for (const photo of photos) {
+          photo.addEventListener('click', () => {
+            photo.style.display = 'none';
+            if (--remaining === 0) message.style.display = 'block';
+          }, { once: true });
+        }
+      </script>
     </body>
     </html>
